@@ -7,7 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFile {
-    protected List<Customer> readFileToList(boolean isTest, String path) throws IOException {
+    private final boolean isTest;
+
+    public ReadFile(boolean isTest) {
+        this.isTest = isTest;
+    }
+
+    protected List<Customer> readFileToList(String path) throws Exception {
         List<Customer> result = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;

@@ -8,8 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ReadFileTest {
-    boolean isTest = true;
-    ReadFile r = new ReadFile();
+    ReadFile r = new ReadFile(true);
     String validPath = "files/testFile.txt";
     String invalidPath = "testFile.txt";
 
