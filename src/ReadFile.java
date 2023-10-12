@@ -38,4 +38,12 @@ public class ReadFile {
     protected LocalDate parseDate(String line) {
         return LocalDate.parse(line);
     }
+    
+    protected void errorMessage(Exception e, String message) throws Exception {
+        if(isTest) {
+            throw e;
+        } else {
+            System.out.println(message);
+        }
+    }
 }
