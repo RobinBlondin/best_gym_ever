@@ -3,6 +3,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,20 +14,23 @@ public class ReadFileTest {
     String invalidPath = "testFile.txt";
 
     @Test
-    public void readFileToList() throws IOException {
+    public void readFileToList() throws Exception {
         Customer expectedCustomer = new Customer(
                 "firstname lastname",
                 "12345677890",
                 LocalDate.parse("2014-03-26"));
 
-        Customer actualCustomer = r.readFileToList(false, validPath).get(0);
+        Customer actualCustomer = r.readFileToList(validPath).get(0);
+        List<Customer> customers = r.readFileToList(validPath);
+        int expectedListSize = 1;
 
         assertNotNull(actualCustomer);
+        assertEquals(expectedListSize, customers.size());
         assertEquals(expectedCustomer.getName(), actualCustomer.getName());
         assertEquals(expectedCustomer.getSocialSecurityNumber(), actualCustomer.getSocialSecurityNumber());
         assertEquals(expectedCustomer.getJoinDate(), actualCustomer.getJoinDate());
 
-        assertThrows(IOException.class, () -> r.readFileToList(isTest, invalidPath));
+        assertThrows(IOException.class, () -> r.readFileToList(invalidPath));
     }
 
     @Test
