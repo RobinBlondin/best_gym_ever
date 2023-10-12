@@ -16,23 +16,14 @@ public class ReadFile {
     protected List<Customer> readFileToList(String path) throws Exception {
         List<Customer> result = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            while((line = br.readLine()) != null) {
-                result.add(new Customer(parseName(line), parseSocialNumber(line), parseDate(br.readLine())));
+            String line, line2;
+            while((line = br.readLine()) != null && (line2 = br.readLine()) != null) {
+                result.add(new Customer(parseName(line), parseSocialNumber(line), parseDate(line2)));
             }
-        } catch(IOException e) {
-            if(isTest) {
-                throw e;
-            } else {
-                System.out.println("File not found!");
-            }
-        } catch(DateTimeParseException e) {
-            if(isTest) {
-                throw e;
-            } else {
-                System.out.println("parseDate couldn't parse String to LocalDate");
-            }
+        } catch(IOException | DateTimeParseException e) {
+            errorMessage(e, e.getMessage());
         }
+
         return result;
     }
 
