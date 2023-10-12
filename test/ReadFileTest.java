@@ -3,7 +3,9 @@ import org.junit.Test;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,6 +60,19 @@ public class ReadFileTest {
 
         assertEquals(expected, r.parseDate(line));
         assertThrows(DateTimeParseException.class, () -> r.parseDate(wrongInput));
+
+    }
+    
+    @Test
+    public void errorMessage() {
+        Exception e = new NoSuchElementException();
+        Exception f = new InputMismatchException();
+        Exception g = new NullPointerException();
+        
+        assertThrows(e.getClass(), () -> r.errorMessage(e, ""));
+        assertThrows(f.getClass(), () -> r.errorMessage(f, ""));
+        assertThrows(g.getClass(), () -> r.errorMessage(g, ""));
+
 
     }
 
