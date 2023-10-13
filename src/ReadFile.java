@@ -20,8 +20,10 @@ public class ReadFile {
             while((line = br.readLine()) != null && (line2 = br.readLine()) != null) {
                 result.add(new Customer(parseName(line), parseSocialNumber(line), parseDate(line2)));
             }
-        } catch(IOException | DateTimeParseException e) {
-            errorMessage(e, e.getMessage());
+        } catch(IOException e) {
+            errorMessage(e, "File not found: " + e.getMessage());
+        } catch(DateTimeParseException e) {
+            errorMessage(e, "Date parsing error: " + e.getMessage());
         }
 
         return result;
