@@ -4,10 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MembershipTest {
 
-    private final int active = 1;
-    private final int expired = 0;
-    private final int none = -1;
-
     private final int invalid = 2;
     @Test
     void getStatusById() {
@@ -17,8 +13,11 @@ class MembershipTest {
         Membership expectedNone = Membership.NONE;
 
         //enum declarations by method.
+        int active = 1;
         Membership actualActive = Membership.getById(active);
+        int expired = 0;
         Membership actualExpired = Membership.getById(expired);
+        int none = -1;
         Membership actualNone = Membership.getById(none);
 
         assertEquals(expectedActive, actualActive);
