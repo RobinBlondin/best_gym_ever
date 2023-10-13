@@ -1,15 +1,24 @@
 public enum Membership {
-    ACTIVE("has an active subscription."),
-    EXPIRED("has an expired subscription."),
-    NONE("is not a member.");
+    ACTIVE(1, "has an active subscription."),
+    EXPIRED(0, "has an expired subscription."),
+    NONE(-1, "is not a member.");
 
+    private final int id;
     private final String status;
 
-    Membership(String status) {
+
+    Membership(int id, String status) {
+        this.id = id;
         this.status = status;
+
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getStatus() {
         return status;
     }
+
 }
