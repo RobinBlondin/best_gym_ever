@@ -25,7 +25,7 @@ class MembershipTest {
         assertEquals(expectedExpired, actualExpired);
         assertEquals(expectedNone, actualNone);
 
-        assertThrows(IllegalArgumentException.class, () -> Membership.getByID(invalid));
+        assertThrows(IllegalArgumentException.class, () -> Membership.getById(invalid));
     }
 
 }
