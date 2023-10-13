@@ -1,18 +1,15 @@
 import org.junit.Test;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ReadFileTest {
-    ReadFile r = new ReadFile(true);
-    String validPath = "files/testFile.txt";
-    String invalidPath = "testFile.txt";
+    ReadFile validPath = new ReadFile(true, "files/customersTest.txt");
+    ReadFile invalidPath = new ReadFile(true, "customersTest.txt");
+
+    ReadFile r = new ReadFile();
 
     @Test
     public void readFileToList() throws Exception {
@@ -21,8 +18,8 @@ public class ReadFileTest {
                 "12345677890",
                 LocalDate.parse("2014-03-26"));
 
-        Customer actualCustomer = r.readFileToList(validPath).get(0);
-        List<Customer> customers = r.readFileToList(validPath);
+        Customer actualCustomer = validPath.readFileToList().get(0);
+        List<Customer> customers = validPath.readFileToList();
         int expectedListSize = 1;
 
         assertNotNull(actualCustomer);
@@ -31,7 +28,7 @@ public class ReadFileTest {
         assertEquals(expectedCustomer.getSocialSecurityNumber(), actualCustomer.getSocialSecurityNumber());
         assertEquals(expectedCustomer.getJoinDate(), actualCustomer.getJoinDate());
 
-        assertThrows(IOException.class, () -> r.readFileToList(invalidPath));
+        assertThrows(IOException.class, () -> invalidPath.readFileToList());
     }
 
     @Test
@@ -62,20 +59,4 @@ public class ReadFileTest {
         assertThrows(DateTimeParseException.class, () -> r.parseDate(wrongInput));
 
     }
-    
-    @Test
-    public void errorMessage() {
-        Exception e = new NoSuchElementException();
-        Exception f = new InputMismatchException();
-        Exception g = new NullPointerException();
-        
-        assertThrows(e.getClass(), () -> r.errorMessage(e, ""));
-        assertThrows(f.getClass(), () -> r.errorMessage(f, ""));
-        assertThrows(g.getClass(), () -> r.errorMessage(g, ""));
-
-
-    }
-
-
-
 }

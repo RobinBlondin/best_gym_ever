@@ -6,16 +6,16 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFile {
-    private final boolean isTest;
-
-    public ReadFile(boolean isTest) {
-        this.isTest = isTest;
+public class ReadFile extends File {
+    public ReadFile(boolean isTest, String path) {
+        super(isTest, path);
     }
 
-    protected List<Customer> readFileToList(String path) throws Exception {
+    public ReadFile(){}
+
+    protected List<Customer> readFileToList() throws Exception {
         List<Customer> result = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(path))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(getPath()))) {
             String line, line2;
             while((line = br.readLine()) != null && (line2 = br.readLine()) != null) {
                 result.add(new Customer(parseName(line), parseSocialNumber(line), parseDate(line2)));
@@ -39,13 +39,5 @@ public class ReadFile {
 
     protected LocalDate parseDate(String line) {
         return LocalDate.parse(line);
-    }
-    
-    protected void errorMessage(Exception e, String message) throws Exception {
-        if(isTest) {
-            throw e;
-        } else {
-            System.out.println(message);
-        }
     }
 }
