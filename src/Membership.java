@@ -21,4 +21,13 @@ public enum Membership {
         return status;
     }
 
+    public static Membership getById(int id) {
+        for (Membership membership : values()) {
+            if(membership.getId() == id) {
+                return membership;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
 }
