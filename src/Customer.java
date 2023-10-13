@@ -2,7 +2,6 @@ import java.time.LocalDate;
 
 public class Customer extends Person {
     private LocalDate joinDate;
-    private int membership;
 
     public Customer(){}
 
@@ -20,4 +19,9 @@ public class Customer extends Person {
         this.joinDate = joinDate;
     }
     //endregion
+
+    protected boolean isSubscriber(){
+        return !(joinDate.plusYears(1).isBefore(LocalDate.now()));
+    }
+
 }
