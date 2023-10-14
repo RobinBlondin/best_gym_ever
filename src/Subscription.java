@@ -1,7 +1,7 @@
 public enum Subscription {
     ACTIVE(1, "has an active subscription."),
     EXPIRED(0, "has an expired subscription."),
-    NONE(-1, "is not a member.");
+    NONE( -1, "is not a member.");
 
     private final int id;
     private final String status;
@@ -10,7 +10,6 @@ public enum Subscription {
     Subscription(int id, String status) {
         this.id = id;
         this.status = status;
-
     }
 
     public int getId() {
@@ -22,9 +21,9 @@ public enum Subscription {
     }
 
     public static Subscription getById(int id) {
-        for (Subscription membership : values()) {
-            if(membership.getId() == id) {
-                return membership;
+        for (Subscription subscription : values()) {
+            if(subscription.getId() == id) {
+                return subscription;
             }
         }
         throw new IllegalArgumentException();
