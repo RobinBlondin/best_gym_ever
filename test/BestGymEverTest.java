@@ -38,4 +38,24 @@ public class BestGymEverTest {
         assertEquals(expectedInputNoMatch, bg.matchName(wrongInput, testEntry2));
     }
 
+    @Test
+    public void getInput() {
+        String validInput1 = "Alhambra Aromes";
+        String validInput3 = "1234567890";
+        String validInput4 = "Alhambra";
+        String validInput5 = "Mitsuko";
+
+        String expected1 = customers.get(0).getName();
+        String expected2 = customers.get(12).getName();
+
+        //assertEquals();
+    }
+
+    @Test
+    public void ifSubscriber() {
+        Customer isSubscriber = customers.get(0);
+        Customer isNotSubscriber = customers.get(1);
+
+        String expectedOutput = "";
+    }
 }
