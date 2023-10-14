@@ -1,21 +1,21 @@
 public class File {
-    private boolean isTest;
+    private boolean testMode;
     private String path;
 
     public File() {}
 
-    public File(boolean isTest, String path) {
-        this.isTest = isTest;
+    public File(boolean testMode, String path) {
+        this.testMode = testMode;
         this.path = path;
     }
 
     //region Getters / Setters
-    public boolean isTest() {
-        return isTest;
+    public boolean testMode() {
+        return testMode;
     }
 
     public void setTest(boolean test) {
-        isTest = test;
+        testMode = test;
     }
 
     public String getPath() {
@@ -28,7 +28,7 @@ public class File {
     //endregion
 
     protected void errorMessage(Exception e, String message) throws Exception {
-        if(isTest) {
+        if(testMode) {
             throw e;
         } else {
             System.out.println(message);
