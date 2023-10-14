@@ -20,8 +20,14 @@ public class Customer extends Person {
     }
     //endregion
 
-    protected boolean isSubscriber(){
-        return !(joinDate.plusYears(1).isBefore(LocalDate.now()));
+    protected int isSubscriber(){
+        boolean isSubscriber = !(joinDate.plusYears(1).isBefore(LocalDate.now()));
+
+        if(isSubscriber) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 }
