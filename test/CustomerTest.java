@@ -14,9 +14,9 @@ public class CustomerTest {
         Customer exactlyOneYear = new Customer("", "", LocalDate.now().minusYears(1));
         Customer moreThanYear = new Customer("", "", LocalDate.of(2022, 6, 25));
 
-        assertTrue(lessThanYear.isSubscriber());
-        assertTrue(exactlyOneYear.isSubscriber());
-        assertFalse(moreThanYear.isSubscriber());
+        assertEquals(1, lessThanYear.isSubscriber());
+        assertEquals(1, exactlyOneYear.isSubscriber());
+        assertEquals(0, moreThanYear.isSubscriber());
     }
 
 }
