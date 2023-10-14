@@ -24,4 +24,15 @@ public class BestGymEver {
 
     }
 
+    public String matchName(String input, String entry) {
+        String firstName = entry.split(" ")[0];
+        String lastName = entry.split(" ")[1];
+
+        if(input.equalsIgnoreCase(firstName) || input.equalsIgnoreCase(lastName) || input.equalsIgnoreCase(entry)) {
+            return entry;
+        } else {
+            return input;
+        }
+    }
+
 }
