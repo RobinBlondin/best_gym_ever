@@ -8,6 +8,7 @@ public class BestGymEver {
 
     public BestGymEver(boolean isTest) {
         this.isTest = isTest;
+        this.testMode = testMode;
         sc = new Scanner(System.in);
     }
 

@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFile extends File {
-    public ReadFile(boolean isTest, String path) {
-        super(isTest, path);
+    public ReadFile(boolean testMode, String path) {
+        super(testMode, path);
     }
 
     public ReadFile(){}
