@@ -52,11 +52,47 @@ public class BestGymEver {
         String firstName = entry.split(" ")[0];
         String lastName = entry.split(" ")[1];
 
-        if(input.equalsIgnoreCase(firstName) || input.equalsIgnoreCase(lastName) || input.equalsIgnoreCase(entry)) {
-            return entry;
-        } else {
-            return input;
+        Customer result = null;
+        for (Customer c : customers) {
+            if (input.equalsIgnoreCase(c.getName()) || input.contains(c.getSocialSecurityNumber())) {
+                if (c.isSubscriber()) {
+                    writeFile.logEntry(writeFile.customerInfoToString(c));
+                }
+                return c;
+            }
         }
+
+        if (input.matches(name)) {
+            return new Customer(input, "");
+        } else {
+            return new Customer("", input);
+        }
+
+    }
+
+    public String fixInputFormat(String input) {
+        input = input.toUpperCase();
+        StringBuilder result = new StringBuilder();
+        String namePattern = "\\w* \\w*";
+        String ssPattern = "\\d{10,12}";
+
+        if (input.matches(namePattern)) {
+            for (String name : input.split(" ")) {
+                result.append(name.charAt(0)).append(name.substring(1).toLowerCase()).append(" ");
+            }
+        } else if (input.matches(ssPattern)) {
+            if (input.length() > 10) {
+                result.append(input.substring(2));
+            } else {
+                result.append(input);
+            }
+        }
+        return result.toString().trim();
+    }
+
+    public String formatOutputMessage(Customer customer) {
+        String name = customer.getName().isEmpty()? "Input individual" : customer.getName();
+        return String.format("%s have %s subscription", name, customer.getSubscription().getStatus());
     }
 
 }
