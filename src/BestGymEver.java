@@ -30,20 +30,28 @@ public class BestGymEver {
         String namePattern = "\\w* \\w*";
         String ssPattern = "\\d{10,12}";
 
-        if(testMode) {
-            if(mockInput.matches(namePattern) || mockInput.matches(ssPattern)) {
+        if (testMode) {
+            if (mockInput.matches(namePattern) || mockInput.matches(ssPattern)) {
                 return mockInput;
             } else {
                 return "invalid";
             }
         } else {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Please enter your full name or social security number: ");
-            String input = sc.nextLine();
-            if(input.matches(namePattern) || input.matches(ssPattern)) {
-                return input.toLowerCase().trim();
-            } else {
-                return "invalid";
+            while (true) {
+                System.out.println("Please enter your full name or social security number: ");
+                String input = sc.nextLine();
+                if (input.matches(namePattern) || input.matches(ssPattern)) {
+                    return fixInputFormat(input);
+                } else {
+                    System.out.println("""
+                                    Bad format. Please enter either:
+                                                                
+                                    Full name: "firstname lastname"
+                                    Social security number: YYMMDDXXXX
+                                                            YYYYMMDDXXXX
+                                    """);
+                }
             }
         }
     }
