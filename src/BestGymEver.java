@@ -1,23 +1,26 @@
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class BestGymEver {
-    private final boolean testMode;
+    String BAD_FORMAT_MESSAGE = """
+                        Bad format. Please enter either:
+                                   
+                        Full name: "firstname lastname"
+                        Social security number: YYMMDDXXXX
+                                                YYYYMMDDXXXX
+                        """;
+    protected final String NAME_PATTERN = "\\w+ \\w+";
+    protected final String SSN_PATTERN = "\\d{10,12}";
+    //endregion
     private final List<Customer> customers;
-    private final ReadFile readFile;
     private final WriteFile writeFile;
 
-    public BestGymEver(boolean testMode) throws Exception {
+    public BestGymEver() {
         String inputData = "./files/customers.txt";
         String outputData = "./files/log.txt";
-        this.testMode = testMode;
 
-        readFile = new ReadFile(false, inputData);
         writeFile = new WriteFile(false, outputData);
-
-        customers = readFile.readFileToList();
+        customers = new ReadFile(false, inputData).readFileToList();
     }
 
     public static void main(String[] args) throws Exception {
