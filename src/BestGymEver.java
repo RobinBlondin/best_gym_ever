@@ -1,10 +1,11 @@
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BestGymEver {
     private final boolean testMode;
     private final List<Customer> customers;
-    private final Scanner sc;
     private final ReadFile readFile;
     private final WriteFile writeFile;
 
@@ -15,13 +16,36 @@ public class BestGymEver {
 
         readFile = new ReadFile(false, inputData);
         writeFile = new WriteFile(false, outputData);
-        sc = new Scanner(System.in);
 
         customers = readFile.readFileToList();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        BestGymEver bg = new BestGymEver(false);
+        String input = bg.getInput("");
+        System.out.println(input);
+    }
 
+    public String getInput(String mockInput) {
+        String namePattern = "\\w* \\w*";
+        String ssPattern = "\\d{10,12}";
+
+        if(testMode) {
+            if(mockInput.matches(namePattern) || mockInput.matches(ssPattern)) {
+                return mockInput;
+            } else {
+                return "invalid";
+            }
+        } else {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Please enter your full name or social security number: ");
+            String input = sc.nextLine();
+            if(input.matches(namePattern) || input.matches(ssPattern)) {
+                return input.toLowerCase().trim();
+            } else {
+                return "invalid";
+            }
+        }
     }
 
     public String matchName(String input, String entry) {
