@@ -4,13 +4,20 @@ public class Customer extends Person {
     private LocalDate joinDate;
     private Subscription subscription;
 
-    public Customer(){}
-
+    //region Constructors
+    public Customer(){
+        this.subscription = Subscription.NONE;
+    }
+    public Customer(String name, String socialSecurityNumber) {
+        super(name, socialSecurityNumber);
+        this.subscription = Subscription.NONE;
+    }
     public Customer(String name, String socialSecurityNumber, LocalDate joinDate) {
         super(name, socialSecurityNumber);
         this.joinDate = joinDate;
         setSubscription();
     }
+    //endregion
 
     //region Getter and setters
     public LocalDate getJoinDate() {
@@ -36,7 +43,9 @@ public class Customer extends Person {
     //endregion
 
     protected boolean isSubscriber(){
-        return !(joinDate.plusYears(1).isBefore(LocalDate.now()));
+        if(joinDate != null) {
+            return !(joinDate.plusYears(1).isBefore(LocalDate.now()));
+        }
+        return false;
     }
-
 }
