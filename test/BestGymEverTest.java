@@ -41,14 +41,25 @@ public class BestGymEverTest {
     @Test
     public void getInput() {
         String validInput1 = "Alhambra Aromes";
-        String validInput3 = "1234567890";
-        String validInput4 = "Alhambra";
-        String validInput5 = "Mitsuko";
+        String validInput2 = "7703021234";
+        String validInput3 = "197703021234";
+        String invalidInput1 = "Alhambra";
+        String invalidInput2 = "Mitsuko";
+        String invalidInput3 = "1977030212345";
+
 
         String expected1 = customers.get(0).getName();
-        String expected2 = customers.get(12).getName();
+        String expected2 = customers.get(0).getSocialSecurityNumber();
+        String expected3 = "197703021234";
+        String expected4 = "invalid";
 
-        //assertEquals();
+        assertEquals(expected1, bg.getInput(validInput1));
+        assertEquals(expected2, bg.getInput(validInput2));
+        assertEquals(expected3, bg.getInput(validInput3));
+        assertEquals(expected4, bg.getInput(invalidInput1));
+        assertEquals(expected4, bg.getInput(invalidInput2));
+        assertEquals(expected4, bg.getInput(invalidInput3));
+
     }
 
     @Test
