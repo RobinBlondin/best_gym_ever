@@ -12,13 +12,13 @@ public class BestGymEver {
     protected final String NAME_PATTERN = "\\w+ \\w+";
     protected final String SSN_PATTERN = "\\d{10,12}";
     //endregion
+
+    boolean testMode;
     private final List<Customer> customers;
     private final WriteFile writeFile;
 
-    public BestGymEver() {
-        String inputData = "./files/customers.txt";
-        String outputData = "./files/log.txt";
-
+    public BestGymEver(boolean testMode, String inputData, String outputData) throws Exception {
+        this.testMode = testMode;
         writeFile = new WriteFile(false, outputData);
         customers = new ReadFile(false, inputData).readFileToList();
     }
