@@ -3,20 +3,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class WriteFile extends File {
+public class WriteFile extends File implements TestableWriteFile {
     public WriteFile(boolean isTest, String path) {
         super(isTest, path);
     }
 
-    protected void logEntry(String entry) throws Exception {
+    public void logEntry(String entry) {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(getPath(), true))) {
             bw.append(entry);
             bw.newLine();
         } catch(IOException e) {
-            errorMessage(e, "File not found: " + e.getMessage());
+            errorMessage("File not found: " + e.getMessage());
         }
     }
-    protected String customerInfoToString(Customer customer) {
+    public String customerInfoToString(Customer customer) {
         return String.format("%s, %s\n%s", customer.getSocialSecurityNumber(), customer.getName(), LocalDate.now());
     }
 }
