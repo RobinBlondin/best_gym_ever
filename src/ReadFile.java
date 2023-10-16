@@ -6,14 +6,14 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFile extends File {
+public class ReadFile extends File implements TestableReadFile {
     public ReadFile(boolean testMode, String path) {
         super(testMode, path);
     }
 
     public ReadFile(){}
-
-    protected List<Customer> readFileToList() throws Exception {
+    @Override
+    public List<Customer> readFileToList() {
         List<Customer> result = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(getPath()))) {
             String line, line2;
@@ -21,9 +21,9 @@ public class ReadFile extends File {
                 result.add(new Customer(parseName(line), parseSocialNumber(line), parseDate(line2)));
             }
         } catch(IOException e) {
-            errorMessage(e, "File not found: " + e.getMessage());
+            errorMessage("File not found: " + e.getMessage());
         } catch(DateTimeParseException e) {
-            errorMessage(e, "Date parsing error: " + e.getMessage());
+            errorMessage("Date parsing error: " + e.getMessage());
         }
 
         return result;
