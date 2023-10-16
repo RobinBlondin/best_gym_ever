@@ -32,17 +32,24 @@ public class BestGymEver {
         System.out.println(result);
     }
 
-    public String getInput(String ignored) {
-        Scanner sc = new Scanner(System.in);
+    public String getInput(String mockInput) {
+        if(testMode) {
+            return validateInput(mockInput)? fixInputFormat(mockInput) : "";
+        }
         while (true) {
-            System.out.println("Please enter your full name or social security number: ");
-            String input = sc.nextLine();
+            String input = scannerInput();
             if (validateInput(input)) {
                 return fixInputFormat(input);
             } else {
                 System.out.println(BAD_FORMAT_MESSAGE);
             }
         }
+    }
+
+    public String scannerInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter your full name or social security number: ");
+        return sc.nextLine();
     }
 
     public boolean validateInput(String input) {
