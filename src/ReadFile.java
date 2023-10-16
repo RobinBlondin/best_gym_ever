@@ -29,15 +29,15 @@ public class ReadFile extends File implements TestableReadFile {
         return result;
     }
 
-    protected String parseName(String line) {
-        return line.split(", ")[1];
+    public String parseName(String line) {
+        return line.replaceAll("[\\d\\W]+[\\W\\d]+", "");
     }
 
-    protected String parseSocialNumber(String line) {
-        return line.split(", ")[0];
+    public String parseSocialNumber(String line) {
+        return line.replaceAll("\\D+ \\D+", "");
     }
 
-    protected LocalDate parseDate(String line) {
+    public LocalDate parseDate(String line) {
         return LocalDate.parse(line);
     }
 }
