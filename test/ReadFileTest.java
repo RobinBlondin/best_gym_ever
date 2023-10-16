@@ -1,23 +1,19 @@
 import org.junit.Test;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ReadFileTest extends File implements TestableReadFile {
+public class ReadFileTest{
     ReadFile validPath = new ReadFile(true, "files/customersTest.txt");
     ReadFile invalidPath = new ReadFile(true, "customersText.txt");
 
     ReadFile r = new ReadFile();
 
     @Test
-    public void readFileToList_Valid() {
+    public void readFileToList_Valid() throws Exception {
         Customer expectedCustomer = new Customer(
                 "firstname lastname",
                 "1234567890",
@@ -33,7 +29,7 @@ public class ReadFileTest extends File implements TestableReadFile {
         assertEquals(expectedCustomer.getSocialSecurityNumber(), actualCustomer.getSocialSecurityNumber());
         assertEquals(expectedCustomer.getJoinDate(), actualCustomer.getJoinDate());
 
-        assertThrows(IOException.class, this::readFileToList);
+        assertThrows(IOException.class, () -> invalidPath.readFileToList());
     }
 
     @Test
@@ -62,19 +58,5 @@ public class ReadFileTest extends File implements TestableReadFile {
 
         assertEquals(expected, r.parseDate(line));
         assertThrows(DateTimeParseException.class, () -> r.parseDate(wrongInput));
-
-    }
-
-
-    @Override
-    public List<Customer> readFileToList() throws IOException, DateTimeParseException {
-        List<Customer> result = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader(invalidPath.getPath()));
-
-        String line, line2;
-        while ((line = br.readLine()) != null && (line2 = br.readLine()) != null) {
-            result.add(new Customer(r.parseName(line), r.parseSocialNumber(line), r.parseDate(line2)));
-        }
-        return result;
     }
 }
