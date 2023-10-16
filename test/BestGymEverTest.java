@@ -8,40 +8,30 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BestGymEverTest {
     String path = "./files/customers.txt";
     List<Customer> customers = new ReadFile(true, path).readFileToList();
-
-    BestGymEver bg = new BestGymEver(true);
-
-    public BestGymEverTest() throws Exception {
-    }
-
-
+    BestGymEver bg = new BestGymEver();
 
     @Test
-    public void getInput_Valid_Inputs() {
+    public void validateInput_Valid_Inputs() {
         String validInput1 = "Alhambra Aromes";
         String validInput2 = "7703021234";
         String validInput3 = "197703021234";
 
-        String expected1 = customers.get(0).getName();
-        String expected2 = customers.get(0).getSocialSecurityNumber();
-        String expected3 = "197703021234";
-
-        assertEquals(expected1, bg.getInput(validInput1));
-        assertEquals(expected2, bg.getInput(validInput2));
-        assertEquals(expected3, bg.getInput(validInput3));
+        assertTrue(bg.validateInput(validInput1));
+        assertTrue(bg.validateInput(validInput2));
+        assertTrue(bg.validateInput(validInput3));
     }
 
     @Test
-    public void getInput_Invalid_Inputs() {
+    public void validateInput_Invalid_Inputs() {
         String invalidInput1 = "Alhambra";
         String invalidInput2 = "Mitsuko";
         String invalidInput3 = "1977030212345";
+        String invalidInput4 = "";
 
-        String expected4 = "invalid";
-
-        assertEquals(expected4, bg.getInput(invalidInput1));
-        assertEquals(expected4, bg.getInput(invalidInput2));
-        assertEquals(expected4, bg.getInput(invalidInput3));
+        assertFalse(bg.validateInput(invalidInput1));
+        assertFalse(bg.validateInput(invalidInput2));
+        assertFalse(bg.validateInput(invalidInput3));
+        assertFalse(bg.validateInput(invalidInput4));
     }
 
     @Test
@@ -63,7 +53,7 @@ public class BestGymEverTest {
 
 
     @Test
-    public void findCustomer_Customers_In_List() throws Exception {
+    public void findCustomer_Customers_In_List() {
         String validName1 = "Alhambra Aromes";
         String validName2 = "Nahema Ninsson";
 
@@ -84,7 +74,7 @@ public class BestGymEverTest {
     }
 
     @Test
-    public void findCustomer_Customers_Not_In_List() throws Exception {
+    public void findCustomer_Customers_Not_In_List() {
         String name = "robin blondin";
         String ssNumber = "8505081234";
 
