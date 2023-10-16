@@ -58,7 +58,7 @@ public class BestGymEver {
         return (input.matches(NAME_PATTERN) || input.matches(SSN_PATTERN));
     }
 
-    public Customer findCustomer(String input) {
+    public Customer findCustomer(String input) throws Exception {
         for (Customer c : customers) {
             if (input.equalsIgnoreCase(c.getName()) || input.contains(c.getSocialSecurityNumber())) {
                 if (c.isSubscriber()) {
