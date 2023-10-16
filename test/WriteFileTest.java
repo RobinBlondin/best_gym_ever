@@ -1,14 +1,12 @@
 import org.junit.Test;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class WriteFileTest implements TestableWriteFile {
+public class WriteFileTest {
     Customer customer = new Customer("Alhambra Aromes", "7703021234", LocalDate.of(2023, 6, 25));
     WriteFile validPath = new WriteFile(true, "./files/logTest.txt");
     WriteFile invalidPath = new WriteFile(true, "./flies/logTest.txt");
@@ -30,15 +28,6 @@ public class WriteFileTest implements TestableWriteFile {
         List<Customer> afterList = r.readFileToList();
 
         assert(beforeList.size() < afterList.size());
-        assertThrows(IOException.class, () -> logEntry(entry));
+        assertThrows(IOException.class, () -> invalidPath.logEntry(entry));
     }
-
-
-    @Override
-    public void logEntry(String entry) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(invalidPath.getPath(), true));
-        bw.append(entry);
-        bw.newLine();
-    }
-
 }
