@@ -56,7 +56,7 @@ public class BestGymEver {
             }
         }
 
-        if (input.matches(name)) {
+        if (input.matches(NAME_PATTERN)) {
             return new Customer(input, "");
         } else {
             return new Customer("", input);
@@ -68,11 +68,11 @@ public class BestGymEver {
         input = input.toUpperCase();
         StringBuilder result = new StringBuilder();
 
-        if (input.matches(namePattern)) {
+        if (input.matches(NAME_PATTERN)) {
             for (String name : input.split(" ")) {
                 result.append(name.charAt(0)).append(name.substring(1).toLowerCase()).append(" ");
             }
-        } else if (input.matches(ssPattern)) {
+        } else if (input.matches(SSN_PATTERN)) {
             if (input.length() > 10) {
                 result.append(input.substring(2));
             } else {
