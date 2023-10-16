@@ -23,10 +23,13 @@ public class BestGymEver {
         customers = new ReadFile(false, inputData).readFileToList();
     }
 
-    public static void main(String[] args) throws Exception {
-        BestGymEver bg = new BestGymEver(false);
+    public static void main(String[] args) {
+        BestGymEver bg = new BestGymEver();
+
         String input = bg.getInput("");
-        System.out.println(input);
+        Customer c = bg.findCustomer(input);
+        String result = bg.formatOutputMessage(c);
+        System.out.println(result);
     }
 
     public String getInput(String ignored) {
