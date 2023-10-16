@@ -29,41 +29,24 @@ public class BestGymEver {
         System.out.println(input);
     }
 
-    public String getInput(String mockInput) {
-        String namePattern = "\\w* \\w*";
-        String ssPattern = "\\d{10,12}";
-
-        if (testMode) {
-            if (mockInput.matches(namePattern) || mockInput.matches(ssPattern)) {
-                return mockInput;
+    public String getInput(String ignored) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("Please enter your full name or social security number: ");
+            String input = sc.nextLine();
+            if (validateInput(input)) {
+                return fixInputFormat(input);
             } else {
-                return "invalid";
-            }
-        } else {
-            Scanner sc = new Scanner(System.in);
-            while (true) {
-                System.out.println("Please enter your full name or social security number: ");
-                String input = sc.nextLine();
-                if (input.matches(namePattern) || input.matches(ssPattern)) {
-                    return fixInputFormat(input);
-                } else {
-                    System.out.println("""
-                                    Bad format. Please enter either:
-                                                                
-                                    Full name: "firstname lastname"
-                                    Social security number: YYMMDDXXXX
-                                                            YYYYMMDDXXXX
-                                    """);
-                }
+                System.out.println(BAD_FORMAT_MESSAGE);
             }
         }
     }
 
-    public String matchName(String input, String entry) {
-        String firstName = entry.split(" ")[0];
-        String lastName = entry.split(" ")[1];
+    public boolean validateInput(String input) {
+        return (input.matches(NAME_PATTERN) || input.matches(SSN_PATTERN));
+    }
 
-        Customer result = null;
+    public Customer findCustomer(String input) {
         for (Customer c : customers) {
             if (input.equalsIgnoreCase(c.getName()) || input.contains(c.getSocialSecurityNumber())) {
                 if (c.isSubscriber()) {
@@ -84,8 +67,6 @@ public class BestGymEver {
     public String fixInputFormat(String input) {
         input = input.toUpperCase();
         StringBuilder result = new StringBuilder();
-        String namePattern = "\\w* \\w*";
-        String ssPattern = "\\d{10,12}";
 
         if (input.matches(namePattern)) {
             for (String name : input.split(" ")) {
@@ -101,8 +82,9 @@ public class BestGymEver {
         return result.toString().trim();
     }
 
+
     public String formatOutputMessage(Customer customer) {
-        String name = customer.getName().isEmpty()? "Input individual" : customer.getName();
+        String name = customer.getName().isEmpty() ? "Input individual" : customer.getName();
         return String.format("%s have %s subscription", name, customer.getSubscription().getStatus());
     }
 
