@@ -23,8 +23,10 @@ public class BestGymEver {
         customers = new ReadFile(false, inputData).readFileToList();
     }
 
-    public static void main(String[] args) {
-        BestGymEver bg = new BestGymEver();
+    public static void main(String[] args) throws Exception {
+        String inputPath = "files/customers.txt";
+        String outputPath = "files/log.txt";
+        BestGymEver bg = new BestGymEver(false, inputPath, outputPath);
 
         String input = bg.getInput("");
         Customer c = bg.findCustomer(input);
