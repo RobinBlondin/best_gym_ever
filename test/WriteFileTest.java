@@ -7,10 +7,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WriteFileTest {
+    Constants c = new Constants();
     Customer customer = new Customer("Alhambra Aromes", "7703021234", LocalDate.of(2023, 6, 25));
-    WriteFile validPath = new WriteFile(true, "./files/logTest.txt");
-    WriteFile invalidPath = new WriteFile(true, "./flies/logTest.txt");
-    ReadFile r = new ReadFile(true, "./files/logTest.txt");
+    WriteFile validPath = new WriteFile(true, c.PATH_LOG_TEST);
+    WriteFile invalidPath = new WriteFile(true, "");
+
+    ReadFile r = new ReadFile(true, c.PATH_LOG_TEST);
 
     @Test
     public void customerInfoToString() {
