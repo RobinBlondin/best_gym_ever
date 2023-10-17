@@ -1,4 +1,4 @@
-public class File {
+public abstract class File {
     private boolean testMode;
     private String path;
 
@@ -33,6 +33,7 @@ public class File {
             throw e;
         } else {
             System.out.println(message + e.getMessage());
+            System.in.read();
         }
     }
 }
