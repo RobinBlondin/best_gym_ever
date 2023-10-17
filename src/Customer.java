@@ -1,3 +1,6 @@
+import org.w3c.dom.ls.LSOutput;
+
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 
 public class Customer extends Person {
@@ -48,4 +51,6 @@ public class Customer extends Person {
         }
         return false;
     }
+
+
 }
