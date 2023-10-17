@@ -7,10 +7,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ReadFileTest{
-    ReadFile validPath = new ReadFile(true, "files/customersTest.txt");
-    ReadFile invalidPath = new ReadFile(true, "customersText.txt");
-
-    ReadFile r = new ReadFile();
+    Constants c = new Constants();
+    ReadFile validPath = new ReadFile(true, c.PATH_CUSTOMERS_TEST);
+    ReadFile invalidPath = new ReadFile(true, "");
 
     @Test
     public void readFileToList_Valid() throws Exception {
