@@ -30,14 +30,15 @@ public class ReadFile extends File {
     }
 
     public String parseName(String line) {
-        return line.replaceAll("[\\d\\W]+[\\W\\d]+", "");
+        return line.replaceAll(c.ALL_BUT_NAME, "");
+
     }
 
     public String parseSocialNumber(String line) {
-        return line.replaceAll("\\D+ \\D+", "");
+        return line.replaceAll(c.ALL_BUT_SSN, "");
     }
 
-    public LocalDate parseDate(String line) {
+    public LocalDate parseDate(String line) throws DateTimeParseException {
         return LocalDate.parse(line);
     }
 }
