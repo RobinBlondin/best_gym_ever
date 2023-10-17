@@ -5,6 +5,7 @@ public class BestGymEver {
     private final boolean testMode;
     private final List<Customer> customers;
     private final WriteFile writeFile;
+    private final Constants c;
 
     public BestGymEver(boolean testMode, String inputData, String outputData) throws Exception {
         this.testMode = testMode;
