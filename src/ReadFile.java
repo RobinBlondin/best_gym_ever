@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFile extends File {
+    Constants c = new Constants();
     public ReadFile(boolean testMode, String path) {
         super(testMode, path);
     }
