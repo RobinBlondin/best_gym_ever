@@ -13,7 +13,7 @@ public class WriteFile extends File{
             bw.append(entry);
             bw.newLine();
         } catch(IOException e) {
-            errorMessage(e, "File not found: " + e.getMessage());
+            errorMessage(e, "File not found: ");
         }
     }
     public String customerInfoToString(Customer customer) {
