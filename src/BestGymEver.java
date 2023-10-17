@@ -19,14 +19,19 @@ public class BestGymEver {
 
     public BestGymEver(boolean testMode, String inputData, String outputData) throws Exception {
         this.testMode = testMode;
-        writeFile = new WriteFile(false, outputData);
-        customers = new ReadFile(false, inputData).readFileToList();
+        c = new Constants();
+        writeFile = new WriteFile(false, c.PATH_LOG);
+        writeFileTest = new WriteFile(true, c.PATH_LOG_TEST);
+        customers = new ReadFile(false, c.PATH_CUSTOMERS).readFileToList();
+
     }
 
     public static void main(String[] args) throws Exception {
-        String inputPath = "files/customers.txt";
-        String outputPath = "files/log.txt";
-        BestGymEver bg = new BestGymEver(false, inputPath, outputPath);
+        BestGymEver bg = new BestGymEver(false);
+        while (bg.mainProgram(bg)) {
+            bg.pause();
+        }
+    }
 
         String input = bg.getInput("");
         Customer c = bg.findCustomer(input);
@@ -44,18 +49,19 @@ public class BestGymEver {
                 return fixInputFormat(input);
             } else {
                 System.out.println(BAD_FORMAT_MESSAGE);
+                pause();
             }
         }
     }
 
     public String scannerInput() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Please enter your full name or social security number: ");
+        System.out.print(c.WELCOME_MESSAGE);
         return sc.nextLine();
     }
 
     public boolean validateInput(String input) {
-        return (input.matches(NAME_PATTERN) || input.matches(SSN_PATTERN));
+        return (input.matches(c.NAME_PATTERN) || input.matches(c.SSN_PATTERN));
     }
 
     public Customer findCustomer(String input) throws Exception {
@@ -68,7 +74,7 @@ public class BestGymEver {
             }
         }
 
-        if (input.matches(NAME_PATTERN)) {
+        if (input.matches(c.NAME_PATTERN)) {
             return new Customer(input, "");
         } else {
             return new Customer("", input);
@@ -80,11 +86,11 @@ public class BestGymEver {
         input = input.toUpperCase();
         StringBuilder result = new StringBuilder();
 
-        if (input.matches(NAME_PATTERN)) {
+        if (input.matches(c.NAME_PATTERN)) {
             for (String name : input.split(" ")) {
                 result.append(name.charAt(0)).append(name.substring(1).toLowerCase()).append(" ");
             }
-        } else if (input.matches(SSN_PATTERN)) {
+        } else if (input.matches(c.SSN_PATTERN)) {
             if (input.length() > 10) {
                 result.append(input.substring(2));
             } else {
@@ -98,6 +104,15 @@ public class BestGymEver {
     public String formatOutputMessage(Customer customer) {
         String name = customer.getName().isEmpty() ? "Input individual" : customer.getName();
         return String.format("%s have %s subscription", name, customer.getSubscription().getStatus());
+
+    }
+
+    public void pause() {
+        try {
+            System.in.read();
+        } catch(IOException e) {
+            //
+        }
     }
 
 }
