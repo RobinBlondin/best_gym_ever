@@ -6,9 +6,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BestGymEverTest {
-    String path = "./files/customers.txt";
-    List<Customer> customers = new ReadFile(true, path).readFileToList();
-    BestGymEver bg = new BestGymEver(true, path, "");
+    Constants c = new Constants();
+    List<Customer> customers = new ReadFile(true, c.PATH_CUSTOMERS).readFileToList();
+    BestGymEver bg = new BestGymEver(true);
 
     public BestGymEverTest() throws Exception {
     }
@@ -141,7 +141,7 @@ public class BestGymEverTest {
         String expectedActive2 = "Robin Blondin have an active subscription";
         String expectedExpired = "Bear Belle have an expired subscription";
         String expectedNone1 = "Robin Blondin have never had an subscription";
-        String expectedNone2 = "Input individual have never had an subscription";
+        String expectedNone2 = "Unknown have never had an subscription";
 
         assertEquals(expectedActive1, bg.formatOutputMessage(c1));
         assertEquals(expectedActive2, bg.formatOutputMessage(c5));
