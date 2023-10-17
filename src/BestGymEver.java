@@ -42,7 +42,9 @@ public class BestGymEver {
         }
         while (true) {
             String input = scannerInput();
-            if (validateInput(input)) {
+            if (input.equalsIgnoreCase("exit")){
+                return "exit";
+            } else if (validateInput(input)) {
                 return fixInputFormat(input);
             } else {
                 System.out.print(c.BAD_FORMAT_MESSAGE);
