@@ -2,18 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BestGymEver {
-    String BAD_FORMAT_MESSAGE = """
-                        Bad format. Please enter either:
-                                   
-                        Full name: "firstname lastname"
-                        Social security number: YYMMDDXXXX
-                                                YYYYMMDDXXXX
-                        """;
-    protected final String NAME_PATTERN = "\\w+ \\w+";
-    protected final String SSN_PATTERN = "\\d{10,12}";
-    //endregion
-
-    boolean testMode;
+    private final boolean testMode;
     private final List<Customer> customers;
     private final WriteFile writeFile;
 
@@ -48,7 +37,7 @@ public class BestGymEver {
             if (validateInput(input)) {
                 return fixInputFormat(input);
             } else {
-                System.out.println(BAD_FORMAT_MESSAGE);
+                System.out.print(c.BAD_FORMAT_MESSAGE);
                 pause();
             }
         }
