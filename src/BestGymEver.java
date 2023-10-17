@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -5,9 +6,10 @@ public class BestGymEver {
     private final boolean testMode;
     private final List<Customer> customers;
     private final WriteFile writeFile;
+    private final WriteFile writeFileTest;
     private final Constants c;
 
-    public BestGymEver(boolean testMode, String inputData, String outputData) throws Exception {
+    public BestGymEver(boolean testMode) throws Exception {
         this.testMode = testMode;
         c = new Constants();
         writeFile = new WriteFile(false, c.PATH_LOG);
@@ -58,7 +60,11 @@ public class BestGymEver {
         for (Customer c : customers) {
             if (input.equalsIgnoreCase(c.getName()) || input.contains(c.getSocialSecurityNumber())) {
                 if (c.isSubscriber()) {
-                    writeFile.logEntry(writeFile.customerInfoToString(c));
+                    if(testMode) {
+                        writeFileTest.logEntry(writeFileTest.customerInfoToString(c));
+                    } else {
+                        writeFile.logEntry(writeFile.customerInfoToString(c));
+                    }
                 }
                 return c;
             }
