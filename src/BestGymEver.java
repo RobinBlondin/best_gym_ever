@@ -105,7 +105,8 @@ public class BestGymEver {
 
 
     public String formatOutputMessage(Customer customer) {
-        String name = customer.getName().isEmpty() ? "Input individual" : customer.getName();
+        String name = customer.getName().isEmpty() ? "Unknown" : customer.getName();
+        System.out.println();
         return String.format("%s have %s subscription", name, customer.getSubscription().getStatus());
 
     }
