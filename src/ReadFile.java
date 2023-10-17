@@ -12,8 +12,6 @@ public class ReadFile extends File {
         super(testMode, path);
     }
 
-    public ReadFile(){}
-
     public List<Customer> readFileToList() throws Exception {
         List<Customer> result = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(getPath()))) {
@@ -22,9 +20,9 @@ public class ReadFile extends File {
                 result.add(new Customer(parseName(line), parseSocialNumber(line), parseDate(line2)));
             }
         } catch(IOException e) {
-            errorMessage(e, "File not found: " + e.getMessage());
+            errorMessage(e, "File not found: ");
         } catch(DateTimeParseException e) {
-            errorMessage(e, "Date parsing error: " + e.getMessage());
+            errorMessage(e, "Date parsing error: ");
         }
 
         return result;
