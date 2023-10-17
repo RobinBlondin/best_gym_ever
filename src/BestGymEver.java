@@ -25,10 +25,15 @@ public class BestGymEver {
         }
     }
 
+    public boolean mainProgram(BestGymEver bg) throws Exception {
         String input = bg.getInput("");
+        if(input.equalsIgnoreCase("exit")) {
+            return false;
+        }
         Customer c = bg.findCustomer(input);
         String result = bg.formatOutputMessage(c);
         System.out.println(result);
+        return true;
     }
 
     public String getInput(String mockInput) {
