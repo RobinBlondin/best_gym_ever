@@ -174,6 +174,40 @@ public class BestGymEverTest {
     }
 
     @Test
+    public void writeToFile_isSubscriber() throws Exception {
+        int listSizeBefore = new ReadFile(true, c.PATH_LOG_TEST).readFileToList().size();
+        Customer isSubscriber = customers.get(0);
+        bg.writeToFile(isSubscriber);
+        int listSizeAfter = new ReadFile(true, c.PATH_LOG_TEST).readFileToList().size();
+
+        int expectedSize = listSizeBefore + 1;
+
+        assertEquals(expectedSize, listSizeAfter );
+    }
+
+    @Test
+    public void writeToFile_isNotSubscriber() throws Exception {
+        int listSizeBefore = new ReadFile(true, c.PATH_LOG_TEST).readFileToList().size();
+
+        Customer isNotSubscriber = customers.get(1);
+        bg.writeToFile(isNotSubscriber);
+        int listSizeAfter = new ReadFile(true, c.PATH_LOG_TEST).readFileToList().size();
+
+        assertEquals(listSizeBefore, listSizeAfter);
+    }
+
+    @Test
+    public void createUnknownCustomer() {
+        String input1 = "Robin Blondin";
+        String input2 = "8505081234";
+
+        assertEquals(input1, bg.createUnknownCustomer(input1).getName());
+        assertEquals(input2, bg.createUnknownCustomer(input2).getSocialSecurityNumber());
+        assertNotEquals("", bg.createUnknownCustomer(input1).getName());
+        assertNotEquals("", bg.createUnknownCustomer(input2).getSocialSecurityNumber());
+    }
+
+    @Test
     public void formatOutputMessage() {
         Customer c1 = customers.get(0);
         Customer c2 = customers.get(1);
