@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,22 +65,29 @@ public class BestGymEver {
     public Customer findCustomer(String input) throws Exception {
         for (Customer c : customers) {
             if (input.equalsIgnoreCase(c.getName()) || input.contains(c.getSocialSecurityNumber())) {
-                if (c.isSubscriber()) {
-                    if(testMode) {
-                        writeFileTest.logEntry(writeFileTest.customerInfoToString(c));
-                    } else {
-                        writeFile.logEntry(writeFile.customerInfoToString(c));
-                    }
-                }
+                writeToFile(c);
                 return c;
             }
         }
+        return createUnknownCustomer(input);
+    }
+
+    public void writeToFile(Customer c) throws Exception {
+        if (c.isSubscriber()) {
+            if(testMode) {
+                writeFileTest.logEntry(writeFileTest.customerInfoToString(c));
+            } else {
+                writeFile.logEntry(writeFile.customerInfoToString(c));
+            }
+        }
+    }
+
+    public Customer createUnknownCustomer(String input) {
         if (input.matches(c.NAME_PATTERN)) {
             return new Customer(input, "");
         } else {
             return new Customer("", input);
         }
-
     }
 
     public String fixInputFormat(String input) {
@@ -113,5 +119,4 @@ public class BestGymEver {
         return String.format("%s have %s subscription", name, customer.getSubscription().getStatus());
 
     }
-
 }
