@@ -71,7 +71,7 @@ public class BestGymEverTest {
     }
 
     @Test
-    public void fixInputFormat() {
+    public void fixInputFormat_validated_inputs() {
         String input1 = "robin blondin";
         String input2 = "ROBIN BLONDIN";
         String input3 = "8505081474";
@@ -84,7 +84,21 @@ public class BestGymEverTest {
         assertEquals(expected1, bg.fixInputFormat(input2));
         assertEquals(expected2, bg.fixInputFormat(input3));
         assertEquals(expected2, bg.fixInputFormat(input4));
+    }
 
+    @Test
+    public void fixInputFormat_non_valid_inputs() {
+        String input1 = "robin";
+        String input2 = "BLONDIN";
+        String input3 = "850508";
+        String input4 = "85050814745";
+        String input5 = "198505081474";
+
+        assertEquals(input1, bg.fixInputFormat(input1));
+        assertEquals(input2, bg.fixInputFormat(input2));
+        assertEquals(input3, bg.fixInputFormat(input3));
+        assertEquals(input4, bg.fixInputFormat(input4));
+        assertNotEquals(input5, bg.fixInputFormat(input5));
     }
 
     @Test
