@@ -5,10 +5,6 @@ public class Customer extends Person {
     private LocalDate joinDate;
     private Subscription subscription;
 
-    //region Constructors
-    public Customer(){
-        this.subscription = Subscription.NONE;
-    }
     public Customer(String name, String socialSecurityNumber) {
         super(name, socialSecurityNumber);
         this.subscription = Subscription.NONE;
@@ -18,15 +14,10 @@ public class Customer extends Person {
         this.joinDate = joinDate;
         setSubscription();
     }
-    //endregion
 
     //region Getter and setters
     public LocalDate getJoinDate() {
         return joinDate;
-    }
-
-    public void setJoinDate(LocalDate joinDate) {
-        this.joinDate = joinDate;
     }
 
     public Subscription getSubscription() {
@@ -39,11 +30,10 @@ public class Customer extends Person {
         } else {
             this.subscription = Subscription.EXPIRED;
         }
-
     }
     //endregion
 
-    protected boolean isSubscriber(){
+    public boolean isSubscriber(){
         if(joinDate != null) {
             return !(joinDate.plusYears(1).isBefore(LocalDate.now()));
         }
