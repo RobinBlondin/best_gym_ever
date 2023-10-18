@@ -38,11 +38,10 @@ public class Constants {
                                                 
             =========================================
             """;
-    public final String NAME_PATTERN = "\\w+ \\w+";
-    public final String SSN_PATTERN = "\\d{10,12}";
-    public final String ALL_BUT_NAME = "[\\d\\W]+[\\W\\d]+";
-    public final String ALL_BUT_SSN = "\\D+ \\D+";
-
+    public final String NAME_PATTERN = "[a-zA-Z]+ [a-zA-Z]+";
+    public final String SSN_PATTERN = "\\d{10}|\\d{12}";
+    public final String ALL_BUT_NAME = "[^a-zA-Z]{2,}";
+    public final String ALL_BUT_SSN = "\\D+";
     public final String PATH_CUSTOMERS = "files/customers.txt";
     public final String PATH_CUSTOMERS_TEST = "files/customersTest.txt";
     public final String PATH_LOG = "files/log.txt";
