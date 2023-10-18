@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ReadFileTest{
     Constants c = new Constants();
     ReadFile validPath = new ReadFile(true, c.PATH_CUSTOMERS_TEST);
+    ReadFile invalidDate = new ReadFile(true, c.INVALID_DATE_PATH);
+
     ReadFile invalidPath = new ReadFile(true, "");
 
     @Test
-    public void readFileToList_Valid() throws Exception {
+    public void readFileToList_valid_data() throws Exception {
         Customer expectedCustomer = new Customer(
                 "firstname lastname",
                 "1234567890",
@@ -27,8 +29,12 @@ public class ReadFileTest{
         assertEquals(expectedCustomer.getName(), actualCustomer.getName());
         assertEquals(expectedCustomer.getSocialSecurityNumber(), actualCustomer.getSocialSecurityNumber());
         assertEquals(expectedCustomer.getJoinDate(), actualCustomer.getJoinDate());
+    }
 
+    @Test
+    public void readFileToList_invalid_date() {
         assertThrows(IOException.class, () -> invalidPath.readFileToList());
+        assertThrows(DateTimeParseException.class, () -> invalidDate.readFileToList());
     }
 
     @Test
