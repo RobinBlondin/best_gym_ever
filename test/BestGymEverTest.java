@@ -87,6 +87,37 @@ public class BestGymEverTest {
 
     }
 
+    @Test
+    public void formatName() {
+        String input1 = "robin blondin";
+        String input2 = "ROBIN BLONDIN";
+        String input3 =  "rObIn BlOnDiN";
+
+        String expected = "Robin Blondin";
+
+        assertEquals(expected, bg.formatName(input1));
+        assertEquals(expected, bg.formatName(input1));
+        assertEquals(expected, bg.formatName(input1));
+        assertNotEquals(input1, bg.formatName(input1));
+        assertNotEquals(input2, bg.formatName(input2));
+        assertNotEquals(input3, bg.formatName(input3));
+    }
+
+    @Test
+    public void formatSSN() {
+        String input1 = "8505081234";
+        String input2 = "198505081234";
+        String input3 = "202310171234";
+
+        String expected1 = "8505081234";
+        String expected2 = "2310171234";
+
+        assertEquals(expected1, bg.formatSSN(input1));
+        assertEquals(expected1, bg.formatSSN(input2));
+        assertEquals(expected2, bg.formatSSN(input3));
+        assertNotEquals(input2, bg.formatSSN(input2));
+        assertNotEquals(input3, bg.formatSSN(input3));
+    }
 
     @Test
     public void findCustomer_Customers_In_List() throws Exception {

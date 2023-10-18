@@ -86,21 +86,12 @@ public class BestGymEver {
     }
 
     public String fixInputFormat(String input) {
-        input = input.toUpperCase();
-        StringBuilder result = new StringBuilder();
-
         if (input.matches(c.NAME_PATTERN)) {
-            for (String name : input.split(" ")) {
-                result.append(name.charAt(0)).append(name.substring(1).toLowerCase()).append(" ");
-            }
+            return formatName(input);
         } else if (input.matches(c.SSN_PATTERN)) {
-            if (input.length() > 10) {
-                result.append(input.substring(2));
-            } else {
-                result.append(input);
-            }
+            return formatSSN(input);
         }
-        return result.toString().trim();
+        return input;
     }
 
 
