@@ -21,7 +21,7 @@ public class BestGymEver {
     public static void main(String[] args) throws Exception {
         BestGymEver bg = new BestGymEver(false);
         while (bg.mainProgram(bg)) {
-            bg.pause();
+            bg.writeFile.pause();
         }
     }
 
@@ -48,7 +48,7 @@ public class BestGymEver {
                 return fixInputFormat(input);
             } else {
                 System.out.print(c.BAD_FORMAT_MESSAGE);
-                pause();
+                writeFile.pause();
             }
         }
     }
@@ -109,14 +109,6 @@ public class BestGymEver {
         System.out.println();
         return String.format("%s have %s subscription", name, customer.getSubscription().getStatus());
 
-    }
-
-    public void pause() {
-        try {
-            System.in.read();
-        } catch(IOException e) {
-            //
-        }
     }
 
 }

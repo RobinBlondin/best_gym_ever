@@ -33,7 +33,13 @@ public abstract class File {
             throw e;
         } else {
             System.out.println(message + e.getMessage());
-            System.in.read();
+            pause();
         }
+    }
+
+    public void pause() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Press ENTER To continue...");
+        sc.nextLine();
     }
 }
