@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public abstract class File {
     private boolean testMode;
     private String path;
