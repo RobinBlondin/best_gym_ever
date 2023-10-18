@@ -171,7 +171,6 @@ public class BestGymEverTest {
         assertEquals(expected2.getSocialSecurityNumber(), bg.findCustomer(ssNumber).getSocialSecurityNumber());
         assertEquals(expected2.getJoinDate(), bg.findCustomer(ssNumber).getJoinDate());
         assertEquals(expected2.getSubscription(), bg.findCustomer(ssNumber).getSubscription());
-
     }
 
     @Test
@@ -193,6 +192,5 @@ public class BestGymEverTest {
         assertEquals(expectedExpired, bg.formatOutputMessage(c2));
         assertEquals(expectedNone1, bg.formatOutputMessage(c3));
         assertEquals(expectedNone2, bg.formatOutputMessage(c4));
-
     }
 }
