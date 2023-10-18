@@ -37,7 +37,7 @@ public class ReadFile extends File {
         return line.replaceAll(c.ALL_BUT_SSN, "");
     }
 
-    public LocalDate parseDate(String line) throws DateTimeParseException {
+    public LocalDate parseDate(String line) {
         return LocalDate.parse(line);
     }
 }
