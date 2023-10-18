@@ -37,7 +37,6 @@ public class Constants {
             Example: 2305021234 or 202305021234
                                                 
             =========================================
-            Press enter to continue...
             """;
     public final String NAME_PATTERN = "\\w+ \\w+";
     public final String SSN_PATTERN = "\\d{10,12}";
@@ -48,8 +47,6 @@ public class Constants {
     public final String PATH_CUSTOMERS_TEST = "files/customersTest.txt";
     public final String PATH_LOG = "files/log.txt";
     public final String PATH_LOG_TEST = "files/logTest.txt";
-    public final String INVALID_NAME_PATH = "files/customers_invalid_name.txt";
-    public final String INVALID_SSN_PATH = "files/customers_invalid_ssn.txt";
     public final String INVALID_DATE_PATH = "files/customers_invalid_date.txt";
 
 }
