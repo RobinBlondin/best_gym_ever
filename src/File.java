@@ -4,8 +4,6 @@ public abstract class File {
     private boolean testMode;
     private String path;
 
-    public File() {}
-
     public File(boolean testMode, String path) {
         this.testMode = testMode;
         this.path = path;
