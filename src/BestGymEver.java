@@ -76,7 +76,6 @@ public class BestGymEver {
                 return c;
             }
         }
-
         if (input.matches(c.NAME_PATTERN)) {
             return new Customer(input, "");
         } else {
@@ -92,6 +91,19 @@ public class BestGymEver {
             return formatSSN(input);
         }
         return input;
+    }
+
+    public String formatName(String name) {
+        String[] nameArr = name.split(" ");
+
+        for(int i = 0; i < nameArr.length; i++) {
+            nameArr[i] = nameArr[i].substring(0,1).toUpperCase() + nameArr[i].substring(1).toLowerCase();
+        }
+        return String.join(" ", nameArr);
+    }
+
+    public String formatSSN(String ssn) {
+        return ssn.length() == 12? ssn.substring(2): ssn;
     }
 
 
