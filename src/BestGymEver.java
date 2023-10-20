@@ -40,7 +40,7 @@ public class BestGymEver {
             return validateInput(mockInput)? fixInputFormat(mockInput) : "";
         }
         while (true) {
-            String input = scannerInput();
+            String input = scannerInput().trim();
             if (input.equalsIgnoreCase("exit")){
                 return "exit";
             } else if (validateInput(input)) {
