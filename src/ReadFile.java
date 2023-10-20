@@ -24,13 +24,11 @@ public class ReadFile extends File {
         } catch(DateTimeParseException e) {
             errorMessage(e, "Date parsing error: ");
         }
-
         return result;
     }
 
     public String parseName(String line) {
         return line.replaceAll(c.ALL_BUT_NAME, "");
-
     }
 
     public String parseSocialNumber(String line) {
