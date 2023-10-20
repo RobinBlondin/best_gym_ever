@@ -39,8 +39,4 @@ public class Customer extends Person {
         }
         return false;
     }
-
-
-
-
 }
