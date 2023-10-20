@@ -5,9 +5,9 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerTest {
-    Customer lessThanYear = new Customer("", "", LocalDate.of(2023, 6, 25));
+    Customer lessThanYear = new Customer("", "", LocalDate.now().minusMonths(6));
     Customer exactlyOneYear = new Customer("", "", LocalDate.now().minusYears(1));
-    Customer moreThanYear = new Customer("", "", LocalDate.of(2022, 6, 25));
+    Customer moreThanYear = new Customer("", "", LocalDate.now().minusMonths(18));
 
 
     @Test
@@ -26,5 +26,4 @@ public class CustomerTest {
         assertEquals(expectedActive, exactlyOneYear.getSubscription());
         assertEquals(expectedExpired, moreThanYear.getSubscription());
     }
-
 }
